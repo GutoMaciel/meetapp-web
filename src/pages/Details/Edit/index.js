@@ -13,8 +13,18 @@ import BannerInput from '../BannerInput';
 
 import { Container } from './styles';
 
+// const schema = Yup.object().shape({
+//   file_id: Yup.number(),
+//   title: Yup.string().required('O Título do Meetup é obrigatório'),
+//   description: Yup.string().required('A Descrição Completa é obrigatória'),
+//   date: Yup.date()
+//     .min(new Date(), 'Não é possível selecionar datas passadas')
+//     .required('A Data do Meetup é obrigatória')
+//     .typeError('Informe uma Data válida'),
+//   location: Yup.string().required('A Localização é obrigatória'),
+// });
 const schema = Yup.object().shape({
-  file_id: Yup.number(),
+  file_id: Yup.mixed().required('A Imagem do Banner é obrigatória'),
   title: Yup.string().required('O Título do Meetup é obrigatório'),
   description: Yup.string().required('A Descrição Completa é obrigatória'),
   date: Yup.date()
@@ -42,10 +52,10 @@ export default function Edit({ match }) {
   async function handleSubmit(data) {
     try {
       await api.put(`meetups/${id}`, data);
-      toast.success('Meetup atualizado com Sucesso!');
+      toast.success('Success!');
       history.push('/dashboard');
     } catch (error) {
-      toast.error('Erro ao Atualizar o Meetup. Verifique os Dados!');
+      toast.error('Error. Verifie your data');
     }
   }
 
@@ -58,18 +68,18 @@ export default function Edit({ match }) {
         autoComplete="off"
       >
         <BannerInput name="file_id" />
-        <Input name="title" type="text" placeholder="Título do Meetup" />
+        <Input name="title" type="text" placeholder="Meetup title" />
         <Input
           multiline
           name="description"
           rows="10"
-          placeholder="Descrição Completa"
+          placeholder="Description"
         />
-        <DateTimePicker name="date" placeholder="Data do Meetup" />
-        <Input name="location" type="text" placeholder="Localização" />
+        <DateTimePicker name="date" placeholder="Meetup date" />
+        <Input name="location" type="text" placeholder="Location" />
         <button type="submit">
           <MdAddCircleOutline size={20} color="#fff" />
-          Salvar Meetup
+          Save
         </button>
       </Form>
     </Container>

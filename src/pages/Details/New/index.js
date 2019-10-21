@@ -8,26 +8,39 @@ import api from '~/services/api';
 import history from '~/services/history';
 
 import DateTimePicker from '~/components/DateTimePicker';
-// import BannerInput from '../BannerInput';
+import BannerInput from '../BannerInput';
 
 import { Container } from './styles';
 
+// const schema = Yup.object().shape({
+//   file_id: Yup.number(),
+//   title: Yup.string().required('Title is required'),
+//   description: Yup.string().required('Description is required'),
+//   date: Yup.date()
+//     .min(new Date(), 'You cannot create meetups in past dates.')
+//     .required('Date is required')
+//     .typeError('Invalid date'),
+//   location: Yup.string().required('Locations is Required'),
+// });
+
 const schema = Yup.object().shape({
-  file_id: Yup.number(),
-  title: Yup.string().required('Title is required'),
-  description: Yup.string().required('Description is required'),
+  file_id: Yup.mixed().required('A Imagem do Banner é obrigatória'),
+  title: Yup.string().required('O Título do Meetup é obrigatório'),
+  description: Yup.string().required('A Descrição Completa é obrigatória'),
   date: Yup.date()
-    .min(new Date(), 'You cannot create meetups in past dates.')
-    .required('Date is required')
-    .typeError('Invalid date'),
-  location: Yup.string().required('Locations is Required'),
+    .min(new Date(), 'Não é possível selecionar datas passadas')
+    .required('A Data do Meetup é obrigatória')
+    .typeError('Informe uma Data válida'),
+  location: Yup.string().required('A Localização é obrigatória'),
 });
 
 export default function New() {
   async function handleSubmit(data) {
     try {
       await api.post('meetups', data);
-      toast.success('Success!');
+
+      toast.success('Success');
+
       history.push('/dashboard');
     } catch (err) {
       toast.error('Error. Verifie your data.');
@@ -37,7 +50,7 @@ export default function New() {
   return (
     <Container>
       <Form onSubmit={handleSubmit} schema={schema} autoComplete="off">
-        {/* <BannerInput name="file_id" /> */}
+        <BannerInput name="file_id" />
         <Input name="title" type="text" placeholder="Meetup title" />
         <Input
           multiline

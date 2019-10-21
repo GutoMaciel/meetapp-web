@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 import history from '~/services/history';
 
+// import BannerInput from '../BannerInput';
+
 import { Container, Description, Time, Location } from './styles';
 
 export default function Detail({ match }) {
@@ -17,22 +19,26 @@ export default function Detail({ match }) {
 
   useEffect(() => {
     async function getMeetup() {
-      const response = await api.get(`meetups/${id}`);
+      try {
+        const response = await api.get(`meetups/${id}`);
 
-      const { title, description, date, location, file_id } = response.data;
+        const { title, description, date, location, banner } = response.data;
 
-      const data = {
-        id,
-        title,
-        description,
-        date: format(parseISO(date), "dd 'de' MMMM', às 'HH'hs'", {
-          locale: pt,
-        }),
-        location,
-        file_id,
-      };
+        const data = {
+          id,
+          title,
+          description,
+          date: format(parseISO(date), "dd ',' MMMM', 'HH'hs'", {
+            locale: pt,
+          }),
+          location,
+          banner,
+        };
 
-      setMeetup(data);
+        setMeetup(data);
+      } catch (err) {
+        toast.error('Fail to load meetup details.');
+      }
     }
 
     getMeetup();
@@ -67,7 +73,7 @@ export default function Detail({ match }) {
           </button>
         </aside>
       </header>
-      <img src={meetup.file_id} alt="file" />
+      <img src={meetup.File && meetup.File.url} alt="Banner" />
       <Description>{meetup.description}</Description>
       <footer>
         <Time>
