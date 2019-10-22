@@ -33,8 +33,6 @@ export default function BannerInput() {
 
     const { url, id } = response.data;
 
-    console.tron.log(url);
-
     setPreview(url);
     setBanner(id);
   }

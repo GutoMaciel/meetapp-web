@@ -12,26 +12,15 @@ import BannerInput from '../BannerInput';
 
 import { Container } from './styles';
 
-// const schema = Yup.object().shape({
-//   file_id: Yup.number(),
-//   title: Yup.string().required('Title is required'),
-//   description: Yup.string().required('Description is required'),
-//   date: Yup.date()
-//     .min(new Date(), 'You cannot create meetups in past dates.')
-//     .required('Date is required')
-//     .typeError('Invalid date'),
-//   location: Yup.string().required('Locations is Required'),
-// });
-
 const schema = Yup.object().shape({
-  file_id: Yup.mixed().required('A Imagem do Banner é obrigatória'),
-  title: Yup.string().required('O Título do Meetup é obrigatório'),
-  description: Yup.string().required('A Descrição Completa é obrigatória'),
+  file_id: Yup.mixed().required('Image required'),
+  title: Yup.string().required('Title required'),
+  description: Yup.string().required('Description required'),
   date: Yup.date()
-    .min(new Date(), 'Não é possível selecionar datas passadas')
-    .required('A Data do Meetup é obrigatória')
-    .typeError('Informe uma Data válida'),
-  location: Yup.string().required('A Localização é obrigatória'),
+    .min(new Date(), 'Cannot select past dates')
+    .required('A meetup date is required')
+    .typeError('Choose an valid date'),
+  location: Yup.string().required('Location required'),
 });
 
 export default function New() {

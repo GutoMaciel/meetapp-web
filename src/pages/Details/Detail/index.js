@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { MdEdit, MdDeleteForever, MdEvent, MdRoom } from 'react-icons/md';
 import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+// import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
-
-// import BannerInput from '../BannerInput';
 
 import { Container, Description, Time, Location } from './styles';
 
@@ -28,9 +26,7 @@ export default function Detail({ match }) {
           id,
           title,
           description,
-          date: format(parseISO(date), "dd ',' MMMM', 'HH'hs'", {
-            locale: pt,
-          }),
+          date: format(parseISO(date), "dd ',' MMMM', 'HH'hs'"),
           location,
           File,
         };
