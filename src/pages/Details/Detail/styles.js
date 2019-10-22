@@ -69,7 +69,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Description = styled.strong`
+export const Description = styled.text`
   color: #fff;
   font-size: 18px;
   display: flex;

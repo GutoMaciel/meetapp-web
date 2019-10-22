@@ -22,7 +22,7 @@ export default function Detail({ match }) {
       try {
         const response = await api.get(`meetups/${id}`);
 
-        const { title, description, date, location, banner } = response.data;
+        const { title, description, date, location, File } = response.data;
 
         const data = {
           id,
@@ -32,8 +32,10 @@ export default function Detail({ match }) {
             locale: pt,
           }),
           location,
-          banner,
+          File,
         };
+
+        console.tron.log(data);
 
         setMeetup(data);
       } catch (err) {

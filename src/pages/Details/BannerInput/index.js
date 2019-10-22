@@ -7,9 +7,9 @@ import api from '~/services/api';
 import { Container } from './styles';
 
 export default function BannerInput() {
-  const { defaultValue, registerField } = useField('file');
+  const { defaultValue, registerField } = useField('File');
 
-  const [file, setFile] = useState(defaultValue && defaultValue.id);
+  const [banner, setBanner] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
   const ref = useRef();
@@ -22,24 +22,26 @@ export default function BannerInput() {
         path: 'dataset.file',
       });
     }
-  }, [ref, registerField]); //eslint-disable-line
+  }, [ref.current]); //eslint-disable-line
 
   async function handleChange(e) {
     const data = new FormData();
 
-    data.append('File', e.target.files[0]);
+    data.append('file', e.target.files[0]);
 
     const response = await api.post('files', data);
 
     const { url, id } = response.data;
 
+    console.tron.log(url);
+
     setPreview(url);
-    setFile(id);
+    setBanner(id);
   }
 
   return (
     <Container>
-      <label htmlFor="banner">
+      <label htmlFor="File">
         {preview ? (
           <img src={preview} alt="Banner" />
         ) : (
@@ -51,9 +53,9 @@ export default function BannerInput() {
 
         <input
           type="file"
-          id="banner"
+          id="File"
           accept="image/*"
-          data-file={file}
+          data-file={banner}
           onChange={handleChange}
           ref={ref}
         />
