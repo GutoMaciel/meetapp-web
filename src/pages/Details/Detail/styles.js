@@ -7,6 +7,7 @@ export const Container = styled.div`
   header {
     height: 150px;
     display: flex;
+    padding: 15px;
     justify-content: space-between;
     align-items: center;
     strong {
@@ -56,8 +57,8 @@ export const Container = styled.div`
     }
   }
   img {
-    width: 900px;
-    height: 250px;
+    height: 300px;
+    padding: 15px;
     border-radius: 4px;
     display: flex;
     align-self: center;
@@ -71,6 +72,7 @@ export const Container = styled.div`
 
 export const Description = styled.text`
   color: #fff;
+  padding: 15px;
   font-size: 18px;
   display: flex;
   text-align: justify;
@@ -78,6 +80,7 @@ export const Description = styled.text`
 
 export const Time = styled.strong`
   display: flex;
+  padding: 15px;
   align-items: center;
   margin-right: 30px;
   margin-bottom: 20px;
