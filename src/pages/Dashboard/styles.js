@@ -50,7 +50,7 @@ export const Meetup = styled.li`
   height: 62px;
   padding: 30px;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
